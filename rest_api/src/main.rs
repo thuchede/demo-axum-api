@@ -1,6 +1,6 @@
 use clap::{Arg, Command};
 use dotenv::dotenv;
-use rest_api::commands;
+use rest_api::{commands, settings};
 
 pub fn main() -> anyhow::Result<()> {
     dotenv().ok();
@@ -22,7 +22,29 @@ pub fn main() -> anyhow::Result<()> {
 
     let matches = command.get_matches();
 
-    commands::handle(&matches)?;
+    let config_location = matches
+        .get_one::<String>("config")
+        .map(|s| s.as_str())
+        .unwrap_or("");
+
+    let settings = settings::Settings::new(config_location, "BOOK")?;
+
+    commands::handle(&matches, &settings)?;
+
+    println!(
+        "db url: {}",
+        settings
+            .database
+            .url
+            .unwrap_or("missing database url".to_string())
+    );
+
+    println!(
+        "log level: {}",
+        settings.logging.log_level.unwrap_or("info".to_string())
+    );
+
+    // commands::handle(&matches)?;
 
     Ok(())
 }
