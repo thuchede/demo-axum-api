@@ -17,6 +17,7 @@ pub async fn hello(State(state): State<Arc<ApplicationState>>) -> Result<String,
 }
 
 
+#[allow(unused)]
 mod tests {
     use std::sync::Arc;
     use axum::extract::State;
