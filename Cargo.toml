@@ -2,5 +2,7 @@
 
 members = [
     "rest_api",
-    "migration"
+    "migration",
+    "entity"
 ]
+resolver = "2"

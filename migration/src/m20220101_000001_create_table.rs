@@ -57,7 +57,7 @@ impl MigrationTrait for Migration {
     }
 }
 
-#[derive(Iden)]
+#[derive(DeriveIden)]
 enum User {
     Table,
     Id,
@@ -65,7 +65,7 @@ enum User {
     Password,
 }
 
-#[derive(Iden)]
+#[derive(DeriveIden)]
 enum Book {
     Table,
     Id,

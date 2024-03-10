@@ -25,3 +25,7 @@ arc-swap = "1.6.0"
 
 sea-orm = { version = "0.12", features = [ "sqlx-postgres", "runtime-tokio-rustls", "macros" ] }
 migration = { path = "../migration" }
+
+entity = { path = "../entity" }
+password-hash = "0.5"
+argon2 = "0.5"
