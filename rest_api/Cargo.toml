@@ -29,3 +29,6 @@ migration = { path = "../migration" }
 entity = { path = "../entity" }
 password-hash = "0.5"
 argon2 = "0.5"
+
+jsonwebtoken = "8.3.0"
+chrono = "0.4.24"
