@@ -14,6 +14,8 @@ pub fn configure(state: Arc<ApplicationState>) -> Router {
             "/books",
             post(handlers::book::create)
                 .with_state(state.clone())
-                .route_layer(middleware::from_fn_with_state(state, auth)),
+                .route_layer(middleware::from_fn_with_state(state.clone(), auth)),
         )
+        .route("/books", get(handlers::book::list).with_state(state.clone()))
+        .route("/books/:id", get(handlers::book::get).with_state(state))
 }

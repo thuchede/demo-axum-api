@@ -22,6 +22,12 @@ pub struct ConfigInfo {
 
 #[derive(Debug, Deserialize, Default, Clone)]
 #[allow(unused)]
+pub struct Tracing {
+    pub otlp_endpoint: Option<String>,
+}
+
+#[derive(Debug, Deserialize, Default, Clone)]
+#[allow(unused)]
 pub struct Settings {
     #[serde(default)]
     pub config: ConfigInfo,
@@ -29,6 +35,8 @@ pub struct Settings {
     pub database: Database,
     #[serde(default)]
     pub logging: Logging,
+    #[serde(default)]
+    pub tracing: Tracing,
     #[serde(default)]
     pub token_secret: String,
     #[serde(default)]
