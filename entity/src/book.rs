@@ -20,3 +20,12 @@ pub struct Model {
 pub enum Relation {}
 
 impl ActiveModelBehavior for ActiveModel {}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, DeriveIntoActiveModel)]
+pub struct BookCreateRequest {
+    pub name: String,
+    pub description: String,
+    pub release_date: NaiveDate,
+    pub author: String,
+    pub isbn: String,
+}
