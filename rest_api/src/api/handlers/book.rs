@@ -11,6 +11,16 @@ use entity::book::Entity as Book;
 use entity::book::{BookCreateRequest};
 use crate::api::middleware::json::CustomJson;
 
+#[utoipa::path(
+    post,
+    path = "/books",
+    tag = "books",
+    request_body = BookCreateRequest,
+    responses(
+        (status = 200, description = "Book create", body = BookCreateResponse),
+        (status = 401, description = "Missing bearer token", body = ErrorResponse),
+    ),
+)]
 #[debug_handler]
 #[instrument(level = "info", name = "create_book", skip_all)]
 pub async fn create(
@@ -30,7 +40,14 @@ pub async fn create(
     Ok(Json(response))
 }
 
-
+#[utoipa::path(
+    get,
+    path = "/books",
+    tag = "books",
+    responses(
+        (status = 200, description = "List books", body = BookListResponse),
+    ),
+)]
 #[instrument(level = "info", name = "list_books", skip_all)]
 pub async fn list(
     State(state): State<Arc<ApplicationState>>,
@@ -48,7 +65,17 @@ pub async fn list(
     Ok(Json(response))
 }
 
-
+#[utoipa::path(
+    get,
+    path = "/books/{bookId}",
+    tag = "books",
+    params(
+        ("bookId" = i32, Path, description = "id of the book"),
+    ),
+    responses(
+        (status = 200, description = "Book", body = BookGetResponse),
+    ),
+)]
 #[instrument(level = "info", name = "get_book", skip_all)]
 pub async fn get(
     State(state): State<Arc<ApplicationState>>,

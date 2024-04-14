@@ -2,9 +2,10 @@ use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde::Serialize;
+use utoipa::ToSchema;
 
 
-#[derive(Serialize)]
+#[derive(Serialize, ToSchema)]
 pub enum Status {
     #[serde(rename = "success")]
     Success,
@@ -12,7 +13,7 @@ pub enum Status {
     Error,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, ToSchema)]
 pub struct ErrorResponse {
     pub status: Status,
     pub message: String,

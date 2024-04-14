@@ -16,6 +16,17 @@ use axum::Json;
 use crate::api::middleware::json::CustomJson;
 use crate::api::response::error::{AppError, Status};
 
+
+#[utoipa::path(
+    post,
+    path = "/login",
+    tag = "login",
+    request_body = LoginRequest,
+    responses(
+        (status = 200, description = "Login success", body = LoginResponse),
+        (status = 401, description = "Unauthorized", body = ErrorResponse),
+    ),
+)]
 pub async fn login(
     State(state): State<Arc<ApplicationState>>,
     CustomJson(payload): CustomJson<LoginRequest>,
